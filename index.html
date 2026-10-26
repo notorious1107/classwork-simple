@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="适合小学生使用的四则运算练习网页">
+  <title>数学闯关练习</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="数学闯关练习首页">
+        <span class="brand-icon" aria-hidden="true">✦</span>
+        <span>
+          <strong>数学闯关</strong>
+          <small>每天进步一点点</small>
+        </span>
+      </a>
+      <nav class="tabs" aria-label="页面切换">
+        <button class="tab active" type="button" data-tab="practice">孩子练习</button>
+        <button class="tab" type="button" data-tab="history">家长查看</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel practice-panel" data-panel="practice">
+        <div class="intro">
+          <div>
+            <span class="eyebrow">小学四则运算</span>
+            <h1>今天也来挑战<br><em>10 道题</em>吧！</h1>
+            <p>选一个合适的难度，认真计算。每答完一题，就能马上看到结果。</p>
+          </div>
+          <div class="number-art" aria-hidden="true">
+            <span class="bubble bubble-one">8</span>
+            <span class="bubble bubble-two">×</span>
+            <span class="bubble bubble-three">4</span>
+            <span class="bubble bubble-four">?</span>
+          </div>
+        </div>
+
+        <div class="practice-grid">
+          <aside class="settings-card">
+            <h2>开始前准备</h2>
+            <label for="child-name">孩子的名字</label>
+            <input id="child-name" type="text" maxlength="20" placeholder="例如：小明">
+
+            <label for="level">选择难度</label>
+            <select id="level">
+              <option value="add-sub-20">第一关：20以内加减</option>
+              <option value="mul-div-20">第二关：20以内乘除</option>
+              <option value="mixed-100">第三关：100以内混合</option>
+            </select>
+
+            <div class="tip-box">
+              <span aria-hidden="true">💡</span>
+              <p><strong>小提示</strong>不会时可以先在纸上画一画、算一算。</p>
+            </div>
+          </aside>
+
+          <section class="question-card" aria-labelledby="question-title">
+            <div class="question-topline">
+              <div>
+                <span id="progress-text">第 1 / 10 题</span>
+                <div class="progress-track" aria-hidden="true">
+                  <div id="progress-bar" class="progress-bar"></div>
+                </div>
+              </div>
+              <span id="session-score" class="score-pill">本轮答对 0 题</span>
+            </div>
+
+            <h2 id="question-title" class="sr-only">当前题目</h2>
+            <div id="expression" class="expression" aria-live="polite"></div>
+
+            <label class="answer-label" for="answer">我的答案</label>
+            <input
+              id="answer"
+              class="answer-input"
+              type="number"
+              inputmode="numeric"
+              autocomplete="off"
+              placeholder="在这里填答案"
+            >
+
+            <div id="feedback" class="feedback" aria-live="polite">
+              算好后，把答案填在上面。
+            </div>
+
+            <button id="submit-answer" class="primary-button" type="button">提交答案</button>
+            <button id="next-question" class="primary-button next-button" type="button" hidden>下一题</button>
+          </section>
+        </div>
+      </section>
+
+      <section class="panel history-panel" data-panel="history" hidden>
+        <div class="history-heading">
+          <div>
+            <span class="eyebrow">家长专区</span>
+            <h1>练习记录</h1>
+            <p>这里会保留孩子在这台电脑、这个浏览器里的答题情况。</p>
+          </div>
+          <div class="history-actions">
+            <button id="export-history" class="secondary-button" type="button">导出记录</button>
+            <button id="clear-history" class="danger-button" type="button">清空记录</button>
+          </div>
+        </div>
+
+        <div class="stats-grid" aria-label="练习统计">
+          <article><span>练习总数</span><strong id="total-count">0</strong></article>
+          <article><span>答对</span><strong id="correct-count">0</strong></article>
+          <article><span>答错</span><strong id="wrong-count">0</strong></article>
+          <article><span>正确率</span><strong id="accuracy">0%</strong></article>
+        </div>
+
+        <div class="records-card">
+          <div class="records-toolbar">
+            <h2>答题明细</h2>
+            <div class="filter-group">
+              <button class="filter active" type="button" data-filter="all">全部</button>
+              <button class="filter" type="button" data-filter="wrong">只看错题</button>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>时间</th>
+                  <th>姓名</th>
+                  <th>难度</th>
+                  <th>题目</th>
+                  <th>孩子答案</th>
+                  <th>正确答案</th>
+                  <th>结果</th>
+                </tr>
+              </thead>
+              <tbody id="history-body"></tbody>
+            </table>
+            <p id="history-empty" class="empty-state">还没有练习记录，先去完成几道题吧。</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>所有记录仅保存在当前浏览器中，不会上传到网络。</footer>
+  </div>
+</body>
+</html>
